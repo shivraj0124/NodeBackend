@@ -5,17 +5,17 @@ const getAllSellers = async (req, res) => {
   const { token } = req.body;
   try {
     if (token && token === "VJTI") {
-      const unverSellers = await SellerModel.find({ isVerified: false });
-      const verSellers = await SellerModel.find({ isVerified: true });
+      const unVerSellers = await SellerModel.find({ isVerified: false },{password:0});
+      const verSellers = await SellerModel.find({ isVerified: true },{password:0});
       res.send({
         success: true,
-        unverified: unversellers,
-        verified: versellers,
+        unverified: unVerSellers,
+        verified: verSellers,
       });
     } else {
       res.send({
         success: false,
-        data: sellers,
+        message: "Invalid token",
       });
     }
   } catch (err) {
@@ -24,19 +24,18 @@ const getAllSellers = async (req, res) => {
 };
 
 const updateSellerStatus = async (req, res) => {
-  const { token } = req.body;
+  const { token,sellerId } = req.body;
   try {
     if (token && token === "VJTI") {
-      const seller = await SellerModel.find();
+      const seller = await SellerModel.findByIdAndUpdate(sellerId,{ isVerified: true },{new:true});
+
       res.send({
         success: true,
-        unverified: unversellers,
-        verified: versellers,
+        message:"Seller Verified"
       });
     } else {
       res.send({
-        success: false,
-        data: sellers,
+        success: false,message:"Invalid Token"
       });
     }
   } catch (err) {
