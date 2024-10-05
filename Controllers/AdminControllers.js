@@ -1,6 +1,6 @@
 const User = require("../Models/BuyerModel");
 const SellerModel = require("../Models/SellerModel");
-
+const ProductModel = require("../Models/ProductModel")
 const getAllSellers = async (req, res) => {
   const { token } = req.body;
   try {
@@ -43,7 +43,44 @@ const updateSellerStatus = async (req, res) => {
   }
 };
 
+const deleteSeller =async(req,res)=>{
+  const {sellerId,token}=req.body
+  try {
+    if (token && token === "VJTI") {
+        const deletedSeller = await SellerModel.findByIdAndDelete(sellerId);
+
+      res.send({
+        success: true,
+        message:"Seller deleted"
+      });
+    } else {
+      res.send({
+        success: false,message:"Invalid Token"
+      });
+    }
+  } catch (err) {
+    res.send({ message: err.message });
+  }
+}
+
+const getStats = async(req,res)=>{
+    try{
+        const sellerCount = await SellerModel.countDocuments();
+        const buyerCount = await User.countDocuments();
+        const productCount = await ProductModel.countDocuments();
+        res.send({
+            success:true,
+            sellerCount,
+            productCount,
+            buyerCount
+        })
+    }catch(err){
+        res.send({ message: err.message });
+    }
+}
 module.exports = {
   getAllSellers,
   updateSellerStatus,
+  deleteSeller,
+  getStats
 };
