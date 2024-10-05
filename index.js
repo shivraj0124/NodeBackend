@@ -16,6 +16,7 @@ app.use(bodyParser.json()); // Parse JSON bodies
 const authRoutes = require("./Routes/AuthRoutes");
 const sellerRoutes = require("./Routes/SellerRoutes");
 const adminRoutes = require("./Routes/AdminRoutes");
+const buyerRoutes = require("./Routes/UserRoutes");
 
 const connectDB = async () => {
   try {
@@ -35,6 +36,7 @@ connectDB();
 app.use("/auth",authRoutes)
 app.use("/seller",sellerRoutes)
 app.use("/admin",adminRoutes)
+app.use("/buyer",buyerRoutes)
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
