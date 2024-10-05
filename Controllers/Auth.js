@@ -3,6 +3,7 @@ const User = require("../Models/BuyerModel");
 const SellerModel = require("../Models/SellerModel");
 const bcrypt = require("bcryptjs");
 const generateToken = require("../Utils/generateToken");
+
 const buyerSignup = async (req, res) => {
   try {
     const { name, password, address, phone_num, email } = req.body;
@@ -151,10 +152,20 @@ const sellerLogin = async (req, res) => {
     } catch (err) {
       res.send({success:false, message: err.message });
     }
-  };
+};
+
+const adminLogin =async(req,res)=>{
+    const {username,password} = req.body
+    if(username === "admin" && password === "admin567"){
+        return res.send({success:true,message:"Admin logged in successfully!",token:"VJTI"})
+    }else{
+        return res.send({success:false,message:"Invalid username or password"})
+    }
+}
 module.exports = {
   buyerSignup,
   buyerLogin,
   SellerSignup,
-  sellerLogin
+  sellerLogin,
+  adminLogin
 };

@@ -25,6 +25,7 @@ const sellerSchema = new mongoose.Schema({
   {
     timestamps: true,
   });
+
   
   // Create the model
   const Seller = mongoose.model('Seller', sellerSchema);

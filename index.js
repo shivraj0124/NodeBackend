@@ -14,6 +14,8 @@ app.use(cors()); // Enable CORS
 app.use(bodyParser.json()); // Parse JSON bodies
 
 const authRoutes = require("./Routes/AuthRoutes");
+const sellerRoutes = require("./Routes/SellerRoutes");
+const adminRoutes = require("./Routes/AdminRoutes");
 
 const connectDB = async () => {
   try {
@@ -31,6 +33,8 @@ connectDB();
 // Start the Server
 
 app.use("/auth",authRoutes)
+app.use("/seller",sellerRoutes)
+app.use("/admin",adminRoutes)
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
