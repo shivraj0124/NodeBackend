@@ -8,6 +8,6 @@ const userSchema = new mongoose.Schema({
   });
   
   // Create the model
-  const User = mongoose.model('User', userSchema);
+  const User = mongoose.model('Buyer', userSchema);
   
   module.exports = User;

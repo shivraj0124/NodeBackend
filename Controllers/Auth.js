@@ -1,7 +1,7 @@
 const express = require("express");
 const User = require("../Models/BuyerModel")
 const bcrypt = require("bcryptjs");
-
+const generateToken = require("../Utils/generateToken")
 const buyerSignup = async (req, res) => {
   try {
     const {name,password,address,phone_num,email} = req.body
@@ -14,7 +14,7 @@ const buyerSignup = async (req, res) => {
     }
     const phone_numExist = await User.findOne({ phone_num });
     if (phone_numExist) {
-      return res.send({ message: "Email already exist" });
+      return res.send({ message: "Mobile No. exist" });
     }
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
@@ -33,9 +33,6 @@ const buyerSignup = async (req, res) => {
       });
     }
 
-    res.send({
-      message: "Signup successful",
-    });
   } catch (err) {
     res.send({ message: err.message });
   }
@@ -43,21 +40,25 @@ const buyerSignup = async (req, res) => {
 
 const buyerLogin = async (req, res) => {
     try {
-      const {username,password} = req.body
-      const user = await User.findOne({ username });
+      const {email,password} = req.body
+      const user = await User.findOne({ email });
     if (!user) {
-      return res.send({ message: "Invalid username or password" });
+      return res.send({ message: "Invalid email or password" });
     }
 
     // Check if the password is correct
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.send({ message: "Invalid username or password" });
+      return res.send({ message: "Invalid email or password" });
     }
+    return res.send({
+        message:"User Logged in successful!",token: generateToken(user._id)
+    })
     } catch (err) {
       res.send({ message: err.message });
     }
-  };
+};
+
 
 module.exports = {
     buyerSignup,
