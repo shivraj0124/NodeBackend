@@ -78,6 +78,7 @@ const getStats = async(req,res)=>{
         res.send({ message: err.message });
     }
 }
+
 module.exports = {
   getAllSellers,
   updateSellerStatus,

@@ -59,6 +59,17 @@ const addProduct = async (req, res) => {
   }
 };
 
+const getSellerStats=async(req,res)=>{
+  try{
+    
+  }catch(err){
+    return res.send({
+      success:false,
+      message:err
+    })
+  }
+}
+
 
 module.exports = {
   addProduct
