@@ -105,7 +105,33 @@ const getSellerStats=async(req,res)=>{
   }
 }
 
+const getProductsBySeller=async(req,res)=>{
+  try{
+    const {sellerId} = req.body
+    const getProduct = await ProductModel.find({sellerId:sellerId});
+    
+    
+    if(getProduct){
+      return res.send({
+        success:true,
+        data:getProduct,
+        message:"Data found"
+      })
+    }else{
+      return res.send({
+        success:false,
+        message:"Data not found"
+      })
+    }
+  }catch(err){
+    return res.send({
+      success:false,
+      message:err
+    })
+  }
+}
 
 module.exports = {
-  addProduct
+  addProduct,
+  getProductsBySeller
 }
