@@ -11,7 +11,7 @@ const productSchema = new mongoose.Schema(
     discount: { type: String },
     ratings: { type: Number, default: 0 },
     reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: "Review" }],
-    images: [{ type: String, required: true }],
+    images: { type: String, required: true },
     likes: Number,
     sellerId: [{ type: mongoose.Schema.Types.ObjectId, ref: "Seller" }],
   },

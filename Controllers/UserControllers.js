@@ -89,7 +89,7 @@ const getSignleProduct =async(req,res)=>{
     const {productId}=req.body
     const getProduct = await productModel.findById(productId).populate("reviews")    
     .populate("sellerId"); 
-
+ 
     if(getProduct){
       return res.send({
         success:true,

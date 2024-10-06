@@ -79,7 +79,7 @@ const addProduct = async (req, res) => {
           console.error("Error with OpenAI API:", error);
         }
     }
-    postToInsta(images[0], description);
+    postToInsta(images, description);
 
     res.send({
       success: true,
