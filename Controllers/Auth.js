@@ -62,6 +62,7 @@ const buyerLogin = async (req, res) => {
         success:true,
       message: "User Logged in successful!",
       token: generateToken(user._id),
+      user
     });
   } catch (err) {
     res.send({success:false, message: err.message });
@@ -148,6 +149,7 @@ const sellerLogin = async (req, res) => {
         success:true,
         message: "Seller Logged in successful!",
         token: generateToken(user._id),
+        user
       });
     } catch (err) {
       res.send({success:false, message: err.message });

@@ -131,7 +131,33 @@ const getProductsBySeller=async(req,res)=>{
   }
 }
 
+const getSellerInfo = async(req,res)=>{
+  try{
+    const {sellerId} = req.body
+    const getSeller = await SellerModel.findById(sellerId).populate('products')            // Populate products
+    .populate('reviews') 
+    
+    if(getSeller){
+      return res.send({
+        success:true,
+        data:getSeller,
+        message:"Data found"
+      })
+    }else{
+      return res.send({
+        success:false,
+        message:"Data not found"
+      })
+    }
+  }catch(err){
+    return res.send({
+      success:false,
+      message:err
+    })
+  }
+}
 module.exports = {
   addProduct,
-  getProductsBySeller
+  getProductsBySeller,
+  getSellerInfo
 }
