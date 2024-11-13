@@ -156,9 +156,18 @@ const sellerLogin = async (req, res) => {
     }
 };
 
+// const adminLogin =async(req,res)=>{
+//     const {username,password} = req.body
+//     if(username === "admin" && password === "admin567"){
+//         return res.send({success:true,message:"Admin logged in successfully!",token:"VJTI"})
+//     }else{
+//         return res.send({success:false,message:"Invalid username or password"})
+//     }
+// }
+
 const adminLogin =async(req,res)=>{
     const {username,password} = req.body
-    if(username === "admin" && password === "admin567"){
+    if(username === "admin" && password === "@laksh"){
         return res.send({success:true,message:"Admin logged in successfully!",token:"VJTI"})
     }else{
         return res.send({success:false,message:"Invalid username or password"})
