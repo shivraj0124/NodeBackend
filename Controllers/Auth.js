@@ -4,7 +4,6 @@ const SellerModel = require("../Models/SellerModel");
 const bcrypt = require("bcryptjs");
 const generateToken = require("../Utils/generateToken");
 
-
 const buyerSignup = async (req, res) => {
   try {
     const { name, password, address, phone_num, email } = req.body;
